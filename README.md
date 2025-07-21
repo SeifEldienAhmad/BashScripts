@@ -6,7 +6,21 @@ A curated collection of Bash scripts built during my journey into Linux administ
 
 ## 📂 Structure
 
-Scripts/ ├── mailScript/             # Send emails to users in a list │   ├── mailScript.sh │   └── users.txt ├── backupScript/           # Backup home directory │   └── backup-script.sh ├── updateSystemScript/     # Update system packages and log update history │   └── script-update ├── resourcesChecker/       # Monitor system resources and log usage │   ├── rsourcesChecker.sh │   └── usageLog.txt
+BashScripts/ 
+├── mailScript/             
+# Send emails to users in a list │   
+                                ├── mailScript.sh │   
+                                └── users.txt 
+├── backupScript/           
+# Backup home directory │   
+                        └── backup-script.sh
+├── updateSystemScript/     
+# Update system packages and log update history │   
+                                                └── script-update 
+├── resourcesChecker/       
+# Monitor system resources and log usage │   
+                                         ├── rsourcesChecker.sh │   
+                                         └── usageLog.txt
 
 ---
 
@@ -14,8 +28,8 @@ Scripts/ ├── mailScript/             # Send emails to users in a list │ 
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/scripts.git
-cd scripts/Scripts/
+[git clone https://github.com/SeifEldienAhmad/BashScripts.git](https://github.com/SeifEldienAhmad/BashScripts.git)
+cd scripts/BashScripts/
 
 # Example: Run system update script
 cd updateSystemScript
