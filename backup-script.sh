@@ -14,10 +14,10 @@ tar -czf "$backupName" /etc
 #Checks if the directory backup existed to move the backup file to it, if not it creates it then moves the file
 if [ -d "path/to/backup" ]
 then
-mv "$backupName" "$HOME/backup/"
+mv "$backupName" "path/to/backup/"
 else
-mkdir -p "$HOME/backup"
-mv "$backupName" "$HOME/backup"
+mkdir -p "path/to/backup"
+mv "$backupName" "path/to/backup"
 fi
 
 #Keeps the date of the last update
