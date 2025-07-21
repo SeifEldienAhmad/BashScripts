@@ -12,7 +12,7 @@ backupName="etc_backup_$(date '+%Y-%m-%d_%H-%M-%S').tgz"
 tar -czf "$backupName" /etc
 
 #Checks if the directory backup existed to move the backup file to it, if not it creates it then moves the file
-if [ -d "$HOME/backup" ]
+if [ -d "path/to/backup" ]
 then
 mv "$backupName" "$HOME/backup/"
 else
@@ -21,7 +21,7 @@ mv "$backupName" "$HOME/backup"
 fi
 
 #Keeps the date of the last update
-echo "Backup has been done at: $(date '+%Y-%m-%d  %H:%M:%S')" >> "$HOME/backup/backupHistory.txt"
+echo "Backup has been done at: $(date '+%Y-%m-%d  %H:%M:%S')" >> "path/to/backupHistory.txt"
 
 else
 #Asks the user to run the script as root if he's not
