@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Author: Seif Eldien Ahmad - Task: Update linux-device's resources - Date: 17/7/2025
+
+sudo apt update
+sudo apt -y full-upgrade
+sudo apt autoremove
+
+echo "Update finished on: $(date '+%Y-%m-%d  %H:%M:%S')" >> ~/Desktop/updateHistory.txt
+
+#End
+
