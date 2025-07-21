@@ -7,18 +7,24 @@ A curated collection of Bash scripts built during my journey into Linux administ
 ## 📂 Structure
 
 BashScripts/ 
-├── mailScript/  # Send emails to users in a list │   
-├── mailScript.sh │   
+├── mailScript/  # Send emails to users in a list 
+│   
+├── mailScript.sh 
+│   
 └── users.txt 
 
-├── backupScript/     # Backup home directory │   
+├── backupScript/     # Backup home directory 
+│   
 └── backup-script.sh
 
-├── updateSystemScript/  # Update system packages and log update history │   
+├── updateSystemScript/  # Update system packages and log update history 
+│   
 └── script-update 
 
-├── resourcesChecker/ # Monitor system resources and log usage │   
-├── rsourcesChecker.sh │   
+├── resourcesChecker/ # Monitor system resources and log usage 
+│   
+├── rsourcesChecker.sh 
+│   
 └── usageLog.txt
 
 ---
