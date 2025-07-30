@@ -51,7 +51,7 @@ chmod +x script-update.sh
 🛠 Script Descriptions
 Script Folder	               Description
 mailScript	        Sends emails to users listed in users.txt.
-backupScript	    Creates a backup of user files (e.g., /home).
+backupScript	       Creates a backup of user files (e.g., /home).
 updateSystemScript	Updates system packages and logs update history.
 resourcesChecker	Logs CPU/RAM usage and writes into usageLog.txt.
 ```
