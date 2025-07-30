@@ -1,4 +1,0 @@
-2025-07-21  20:39:35 - CPU: 80% - RAM: 30.9057%
-2025-07-21  20:40:34 - CPU: 100% - RAM: 30.9348%
-2025-07-21  21:01:21 - CPU: 80% - RAM: 31.0168%
-#clear this file or delete it, the script will create one automatically
