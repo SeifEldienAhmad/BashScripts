@@ -1,7 +1,7 @@
 # Linux System Update Script
 
 ### Author:
-**Seif Eldien Ahmad**
+**Seif Eldien Ahmad Mohammad**
 
 ### Date:
 17/07/2025
