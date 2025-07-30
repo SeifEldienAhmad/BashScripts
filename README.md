@@ -8,17 +8,29 @@ A curated collection of Bash scripts built during my journey into Linux administ
 
 BashScripts/
 ├── mailScript/ # Send emails to users in a list
+
 │ ├── mailScript.sh
+
 │ └── users.txt
+
 │
+
 ├── backupScript/ # Backup home directory
+
 │ └── backup-script.sh
+
 │
+
 ├── updateSystemScript/ # Update system packages and log update history
+
 │ └── script-update.sh
+
 │
+
 ├── resourcesChecker/ # Monitor system resources and log usage
+
 │ ├── rsourcesChecker.sh
+
 
 ---
 
