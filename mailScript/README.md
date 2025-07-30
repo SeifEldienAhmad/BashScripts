@@ -1,7 +1,7 @@
 # AutoMail Local Users Script
 
 ### Author:
-**Seif Eldien Ahmad**
+**Seif Eldien Ahmad Mohammad**
 
 ### Date:
 20/07/2025
