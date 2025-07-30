@@ -1,7 +1,7 @@
 # Backup /etc Directory Script
 
 ### Author:
-**Seif Eldien Ahmad**
+**Seif Eldien Ahmad Mohammad**
 
 ### Date:
 18/07/2025
