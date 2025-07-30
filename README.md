@@ -73,8 +73,7 @@ I'm Seif Eldien Ahmad Mohammad, a student of Computer Science, aspiring Red Team
 📜 License
 
 This repository is licensed under the MIT License.
-
-<sub><i>Keywords: Seif Eldien, Seif Eldin, Seif Ahmad, Seif Ahmed, Seif Mohammed, Seif Mohamed, سيف الدين, سيف احمد, سيف محمد, Bash scripting, Linux Bash scripts, Cybersecurity scripts, system automation, Linux update script, resource monitor Bash, email automation Bash, backup script Linux, Linux administration, Parrot OS scripting, Red Teamer Bash tools, MIT License, GitHub Portfolio Bash</i></sub>
+> <sub><i>Keywords: Seif Eldien, Seif Eldin, Seif Ahmad, Seif Ahmed, Seif Mohammed, Seif Mohamed, سيف الدين, سيف احمد, سيف محمد, Bash scripting, Linux Bash scripts, Cybersecurity scripts, system automation, Linux update script, resource monitor Bash, email automation Bash, backup script Linux, Linux administration, Parrot OS scripting, Red Teamer Bash tools, MIT License, GitHub Portfolio Bash</i></sub>
 
 
 ---
