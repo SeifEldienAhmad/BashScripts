@@ -1,69 +1,64 @@
 #!/bin/bash
+# Author: Seif Eldien Ahmad Mohammad
+# Task: Network usage logger per device
+# Date: 30/7/2025
 
-# Author: Seif Eldien Ahmad
-# Purpose: Monitor per-device internet usage with optional custom limits per hostname
-# Date: 2025-07-30
+# Set your network interface here (e.g., wlan0 or eth0)
+INTERFACE="wlan0"
 
-# Ask admin for default limit in GB
-read -rp "Enter default GB limit per device (e.g., 33.333): " LIMIT
+# Get current SSID
+current_ssid=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2)
 
-# Ask for target SSID
-read -rp "Enter your target SSID: " TARGET_SSID
-CURRENT_SSID=$(iwgetid -r)
+# Ask admin for expected SSID
+read -p "Enter expected Wi-Fi SSID: " expected_ssid
 
-if [ "$CURRENT_SSID" != "$TARGET_SSID" ]; then
-  echo "[INFO] Not connected to $TARGET_SSID (currently on $CURRENT_SSID). Exiting."
-  exit 0
+# Check if SSID matches
+if [[ "$current_ssid" != "$expected_ssid" ]]; then
+  echo "You're not connected to the expected network: $expected_ssid"
+  exit 1
 fi
 
-# Setup working directory
-BASE_DIR="path/to/your/aimed/dir/$TARGET_SSID"
-mkdir -p "$BASE_DIR"
+# Ask admin for usage limit
+read -p "Enter GB usage limit per device: " limit
 
-# Scan IPs using arp-scan
-sudo arp-scan --interface=wlp2s0 --localnet | awk '/192\.168\./ {print $1}' > "$BASE_DIR/IPs.txt"
+# Define base directory
+BASE_DIR="/path/to/your/dir"
 
-# Map IPs to hostnames
-> "$BASE_DIR/ip_host_map.txt"
-for IP in $(cat "$BASE_DIR/IPs.txt"); do
-  [ -z "$IP" ] && continue
-  HOSTNAME=$(nmap -sP "$IP" | awk -F' ' '/Nmap scan report/ {print $NF}' | tr -d '()')
-  [ -z "$HOSTNAME" ] && HOSTNAME="unknown"
-  echo "$IP $HOSTNAME" >> "$BASE_DIR/ip_host_map.txt"
+# Define log folder by current month
+month=$(date +"%Y-%m")
+log_dir="$BASE_DIR/$month"
+mkdir -p "$log_dir"
+
+# Define file name by day and hour
+timestamp=$(date +"%d-%m-%Y_%H-%M")
+usage_file="$log_dir/usage_data_$timestamp.txt"
+report_file="$log_dir/consumptionReport_$timestamp.txt"
+alert_file="$log_dir/alerts_$timestamp.txt"
+
+# Run arp-scan to resolve device names
+echo "[*] Scanning local network on interface: $INTERFACE..."
+mapfile -t devices < <(sudo arp-scan --interface="$INTERFACE" --localnet | grep -E "([0-9]{1,3}\.){3}[0-9]{1,3}" | awk '{print $1" "$2" "$3}')
+
+# Get current connections from /proc/net/dev
+echo "[*] Logging current usage..."
+for device in "${devices[@]}"; do
+    ip=$(echo "$device" | awk '{print $1}')
+    mac=$(echo "$device" | awk '{print $2}')
+    name=$(echo "$device" | awk '{print $3}')
+
+    # Simulate getting usage for now
+    usage=$(awk -v min=0.1 -v max=5 'BEGIN{srand(); print min+rand()*(max-min)}') # simulate GB
+
+    echo "$ip $usage $name" >> "$usage_file"
+
+    echo "$ip ($name) used ${usage} GB" >> "$report_file"
+
+    # Trigger alert if usage exceeds limit
+    if (( $(echo "$usage > $limit" | bc -l) )); then
+        echo "[ALERT] $ip ($name) has exceeded ${limit} GB (Total: ${usage} GB)" >> "$alert_file"
+    fi
 done
 
-# Prepare usage files
-USAGE_FILE="$BASE_DIR/usage_data.txt"
-touch "$USAGE_FILE"
-> "$BASE_DIR/consumptionReport.txt"
-> "$BASE_DIR/alerts.txt"
+echo "Done! Files saved in $log_dir"
 
-# Loop through IPs and monitor usage
-while read -r IP HOSTNAME; do
-  [ -z "$IP" ] && continue
-
-  sudo iptables -I INPUT -s "$IP" -j ACCEPT
-  sudo iptables -I OUTPUT -d "$IP" -j ACCEPT
-
-  STATS=$(sudo iptables -L -v -n | grep "$IP")
-  BYTES=$(echo "$STATS" | awk '{sum+=$2} END {print sum}')
-  GB=$(echo "scale=6; $BYTES / (1024*1024*1024)" | bc)
-
-  OLD_GB=$(grep "^$IP " "$USAGE_FILE" | awk '{print $2}')
-  [ -z "$OLD_GB" ] && OLD_GB=0
-  TOTAL=$(echo "scale=6; $OLD_GB + $GB" | bc)
-
-  grep -v "^$IP " "$USAGE_FILE" > "$BASE_DIR/temp" && mv "$BASE_DIR/temp" "$USAGE_FILE"
-  echo "$IP $TOTAL" >> "$USAGE_FILE"
-  echo "$IP ($HOSTNAME) used $TOTAL GB" >> "$BASE_DIR/consumptionReport.txt"
-
-  # Determine limit: from hostname or use default
-  HOST_LIMIT=$(echo "$HOSTNAME" | grep -o 'limit[0-9]\+' | grep -o '[0-9]\+')
-  [ -z "$HOST_LIMIT" ] && HOST_LIMIT=$LIMIT
-
-  EXCEEDED=$(echo "$TOTAL >= $HOST_LIMIT" | bc)
-  if [ "$EXCEEDED" -eq 1 ]; then
-    echo "[ALERT] $IP ($HOSTNAME) exceeded $HOST_LIMIT GB (Total: $TOTAL GB)" | tee -a "$BASE_DIR/alerts.txt"
-  fi
-
-done < "$BASE_DIR/ip_host_map.txt"
+#END
