@@ -1,7 +1,7 @@
 📡 Internet Usage Monitor Script
 
-> Author: Seif Eldien Ahmad Mohammad
-Date: July 30, 2025
+> Author: Seif Eldien Ahmad Mohammad -
+Date: July 30, 2025 -
 Task: Track per-device internet consumption on Wi-Fi networks using Bash scripting and IPTables
 
 
