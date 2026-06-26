@@ -65,12 +65,7 @@ resourcesChecker	Logs CPU/RAM usage and writes into usageLog.txt.
 
 🙋 About Me
 
-I'm Seif Eldien Ahmad Mohammad, a student of Computer Science, aspiring Red Teamer, and Linux enthusiast.
-
-📫 Email: seifahmed7293@gmail.com
-🌍 Location: Fayoum, Egypt
-
-
+I'm Seif Eldien Ahmad Mohammad, a student of Computer Science, aspiring Red Teamer, and Linux enthusiast
 
 🗂️ Future Plans
 
